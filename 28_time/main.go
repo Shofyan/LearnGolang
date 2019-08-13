@@ -15,7 +15,7 @@ func main() {
 
 	fmt.Println("=============")
 
-	t1, err := time.Parse("2006-01-02T15:04:05Z07:00", "2019-01-20T11:45:26.371Z")
+	t1, err := time.Parse("2006-01-02", "2019-01-20")
 
 	if err != nil {
 		fmt.Println(err)
