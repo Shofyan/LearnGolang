@@ -1,3 +1,5 @@
+// code from https://www.golangprograms.com/example-of-golang-crud-using-mysql-from-scratch.html
+
 package main
 
 import (
@@ -34,6 +36,7 @@ var tmpl = template.Must(template.ParseGlob("form/*"))
 // Index untuk akses web pertama kali
 func Index(w http.ResponseWriter, r *http.Request) {
 	db := dbcond()
+	defer db.Close()
 
 	selDB, err := db.Query("SELECT * FROM Employee ORDER BY id DESC")
 	if err != nil {
@@ -59,12 +62,13 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tmpl.ExecuteTemplate(w, "Index", res)
-	defer db.Close()
 }
 
 // Show ialah untuk menampilkan halaman detail
 func Show(w http.ResponseWriter, r *http.Request) {
 	db := dbcond()
+	defer db.Close()
+
 	nID := r.URL.Query().Get("id")
 	selDb, err := db.Query("SELECT * FROM Employee where id=?", nID)
 	if err != nil {
@@ -86,7 +90,6 @@ func Show(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tmpl.ExecuteTemplate(w, "Show", emp)
-	defer db.Close()
 
 }
 
@@ -98,6 +101,8 @@ func New(w http.ResponseWriter, r *http.Request) {
 // Edit menampilkan halaman input yang sudah ada dtanya
 func Edit(w http.ResponseWriter, r *http.Request) {
 	db := dbcond()
+	defer db.Close()
+
 	nID := r.URL.Query().Get("id")
 	selDb, err := db.Query("SELECT * FROM Employee where id=?", nID)
 	if err != nil {
@@ -117,7 +122,6 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 		emp.City = city
 
 	}
-	defer db.Close()
 
 	tmpl.ExecuteTemplate(w, "Edit", emp)
 
@@ -126,6 +130,7 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 // Insert data employee . post method
 func Insert(w http.ResponseWriter, r *http.Request) {
 	db := dbcond()
+	defer db.Close()
 
 	if r.Method == "POST" {
 		name := r.FormValue("name")
@@ -138,7 +143,6 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 		insForm.Exec(name, city)
 		log.Println("INSERT: NAME: " + name + " | CITY: " + city)
 	}
-	defer db.Close()
 
 	http.Redirect(w, r, "/", 301)
 
@@ -147,6 +151,7 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 // Update untuk update data ketika submit
 func Update(w http.ResponseWriter, r *http.Request) {
 	db := dbcond()
+	defer db.Close()
 
 	if r.Method == "POST" {
 		name := r.FormValue("name")
@@ -160,7 +165,6 @@ func Update(w http.ResponseWriter, r *http.Request) {
 		insForm.Exec(name, city, uID)
 		log.Println("UPDATE: NAME: " + name + " | CITY: " + city)
 	}
-	defer db.Close()
 
 	http.Redirect(w, r, "/", 301)
 
@@ -169,6 +173,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 // Delete untuk Delete data
 func Delete(w http.ResponseWriter, r *http.Request) {
 	db := dbcond()
+	defer db.Close()
 
 	ID := r.URL.Query().Get("id")
 	insForm, err := db.Prepare("DELETE from Employee Where id=?")
@@ -177,7 +182,6 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 	}
 	insForm.Exec(ID)
 	log.Println("Delete")
-	defer db.Close()
 
 	http.Redirect(w, r, "/", 301)
 
