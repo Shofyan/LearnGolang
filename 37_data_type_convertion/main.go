@@ -1,3 +1,4 @@
+// ref https://dasarpemrogramangolang.novalagung.com/40-data-type-conversion.html
 package main
 
 import (
@@ -53,5 +54,46 @@ func main() {
 
 	var b int = int(2)
 	fmt.Println(b)
+
+	// string to byte
+	hello := "hello dunia"
+	bb := []byte(hello)
+
+	for _, v := range bb {
+		fmt.Println(v)
+		fmt.Println(string(v))
+	}
+
+	//  assertion  to data type interface
+
+	data := map[string]interface{}{
+		"name":    "shofyan",
+		"grade":   2,
+		"height":  178.2,
+		"isMale":  true,
+		"hobbies": []string{"baca", "renang"},
+	}
+	fmt.Println(data["name"].(string))
+	fmt.Println(data["grade"].(int))
+	fmt.Println(data["height"].(float64))
+	fmt.Println(data["isMale"].(bool))
+	fmt.Println(data["hobbies"].([]string))
+
+	for _, val := range data {
+		switch val.(type) {
+		case string:
+			fmt.Println(val.(string))
+		case int:
+			fmt.Println(val.(int))
+		case float64:
+			fmt.Println(val.(float64))
+		case bool:
+			fmt.Println(val.(bool))
+		case []string:
+			fmt.Println(val.([]string))
+		default:
+			fmt.Println(val.(int))
+		}
+	}
 
 }
