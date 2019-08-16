@@ -19,6 +19,7 @@ func main() {
 
 	/*	var timer = time.NewTimer(4 * time.Second)
 		fmt.Println("start")
+
 		<-timer.C
 		fmt.Print("finish")*/
 
