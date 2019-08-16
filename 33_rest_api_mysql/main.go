@@ -5,10 +5,12 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/mux"
 )
 
 //Employee adalah contoh domain yang akan disave
@@ -37,8 +39,8 @@ func dbconn() (db *sql.DB) {
 	return db
 }
 
-// ReturnAllEmpmployees ngembaliin semua employee
-func ReturnAllEmpmployees(w http.ResponseWriter, r *http.Request) {
+// ReturnAllEmployees ngembaliin semua employee
+func ReturnAllEmployees(w http.ResponseWriter, r *http.Request) {
 	db := dbconn()
 	defer db.Close()
 
@@ -64,20 +66,113 @@ func ReturnAllEmpmployees(w http.ResponseWriter, r *http.Request) {
 		res = append(res, emp)
 	}
 
-	rspnd := ResponseEmployee{
+	response := ResponseEmployee{
 		Status:  1,
 		Message: "Success",
 		Data:    res,
 	}
 
-	w.Header().Set("Contet-Type", "application/json")
-	json.NewEncoder(w).Encode(rspnd)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+
+}
+
+func insertEmployeeMultipart(w http.ResponseWriter, r *http.Request) {
+
+	var response ResponseEmployee
+
+	db := dbconn()
+	defer db.Close()
+
+	err := r.ParseMultipartForm(4096)
+	if err != nil {
+		panic(err)
+	}
+
+	name := r.FormValue("Name")
+	city := r.FormValue("CIty")
+
+	_, err = db.Exec("INSERT INTO EMPLOYEE (Name,City) values(?,?)", name, city)
+
+	if err != nil {
+		log.Println(err)
+	}
+
+	response.Status = 1
+	response.Message = "Success Add"
+	log.Println("insert data to database")
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+
+}
+
+func updateEmployeeMultipart(w http.ResponseWriter, r *http.Request) {
+	db := dbconn()
+	defer db.Close()
+
+	err := r.ParseMultipartForm(4096)
+	if err != nil {
+		panic(err)
+	}
+
+	id := r.FormValue("ID")
+	name := r.FormValue("Name")
+	city := r.FormValue("City")
+
+	_, err = db.Exec("update Employee set name=?,city=? where id = ?", name, city, id)
+	if err != nil {
+		log.Print(err)
+	}
+
+	response := ResponseEmployee{
+		Status:  1,
+		Message: "Success Update Data",
+	}
+	log.Println("Update data to database")
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}
+
+func deleteEmployeesMultipart(w http.ResponseWriter, r *http.Request) {
+	db := dbconn()
+	defer db.Close()
+
+	err := r.ParseMultipartForm(4096)
+	if err != nil {
+		panic(err)
+	}
+
+	id := r.FormValue("ID")
+	_, err = db.Exec("DELETE FROM EMPLOYEE where id=?", id)
+	if err != nil {
+		log.Print(err)
+	}
+	response := ResponseEmployee{
+		Status:  1,
+		Message: "Success Delete Data",
+	}
+	log.Println("Delete data to database")
+
+	w.Header().Set("Content-type", "application/json")
+	json.NewEncoder(w).Encode(response)
 
 }
 
 func main() {
+
+	router := mux.NewRouter()
+	router.HandleFunc("/ReturnAllEmployees", ReturnAllEmployees).Methods("GET")
+	http.Handle("/", router)
+	fmt.Println("Connected to port 8080")
+	log.Fatal(http.ListenAndServe(":8080", router))
+
 	log.Println("Server started on : http://Localhost:8080")
-	http.HandleFunc("/", ReturnAllEmpmployees)
+	http.HandleFunc("/", ReturnAllEmployees)
+	router.HandleFunc("/employees", insertEmployeeMultipart).Methods("POST")
+	router.HandleFunc("/employees", updateEmployeeMultipart).Methods("PUT")
+	router.HandleFunc("/users", deleteEmployeesMultipart).Methods("DELETE")
 
 	http.ListenAndServe(":8080", nil)
 }
