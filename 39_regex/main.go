@@ -16,7 +16,21 @@ func main() {
 	res1 := regex.FindAllString(text, 2)
 	fmt.Printf("%#v \n", res1)
 
-	res2 := regex.FindAllString(text, -1)
-	fmt.Printf("%#v \n", res2)
+	res2 := regex.FindStringIndex(text)
+	fmt.Println(res2)
+
+	// replace all string
+	fmt.Println(regex.ReplaceAllString(text, "potato"))
+
+	// replace all string func
+	fmt.Println(regex.ReplaceAllStringFunc(text, func(each string) string {
+		if each == "burger" {
+			return "potato"
+		}
+		return each
+	}))
+
+	str := regex.Split(text, -1)
+	fmt.Println(str)
 
 }
