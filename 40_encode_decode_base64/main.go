@@ -35,5 +35,4 @@ func main() {
 	fmt.Println(encodeUrl)
 
 	decodeUrl, err := base64.URLEncoding.DecodeString(encodeUrl)
-	fmt.Println(string(decodeUrl))
 }
