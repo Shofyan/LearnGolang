@@ -37,7 +37,7 @@ func sqlQuery() {
 		fmt.Println(err.Error())
 		return
 	}
-	defer rows.Close()
+
 	var result []student
 
 	for rows.Next() {
@@ -58,6 +58,11 @@ func sqlQuery() {
 
 	for _, item := range result {
 		fmt.Println(item.name)
+	}
+
+	if err := rows.Close(); err != nil {
+		fmt.Println(err.Error())
+		return
 	}
 
 }
@@ -95,15 +100,15 @@ func sqlPrepare() {
 	}
 
 	var result1 = student{}
-	stmt.QueryRow("E001").Scan(&result1.name, &result1.grade)
+	_ = stmt.QueryRow("E001").Scan(&result1.name, &result1.grade)
 	fmt.Printf("name: %s, grade: %d\n", result1.name, result1.grade)
 
 	var result2 = student{}
-	stmt.QueryRow("W001").Scan(&result2.name, &result2.grade)
+	_ = stmt.QueryRow("W001").Scan(&result2.name, &result2.grade)
 	fmt.Printf("name: %s, grade: %d\n", result2.name, result2.grade)
 
 	var result3 = student{}
-	stmt.QueryRow("B001").Scan(&result3.name, &result3.grade)
+	_ = stmt.QueryRow("B001").Scan(&result3.name, &result3.grade)
 	fmt.Printf("name: %s, grade: %d\n", result3.name, result3.grade)
 }
 
@@ -138,5 +143,8 @@ func sqlExec() {
 }
 
 func main() {
+	sqlQuery()
+	sqlQueryRow()
+	sqlPrepare()
 	sqlExec()
 }
