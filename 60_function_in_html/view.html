@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning html template function</title>
+</head>
+<body>
+<p>{{ html "<h2>Hello</h2>"}}</p>
+
+
+{{if eq .Name "Bruce wayne"}}
+    <p> i'am  Batman</p>
+{{ else if ne .Name "clark kent"}}
+    <p> i'm neither batman or super man </p>
+{{end}}
+
+<p>
+    {{.SayHello "Rakyat Indoensia" " you are herro"}}
+</p>
+<p>
+    {{printf "%s because i'm %s" " you know why" "because i'm batman"}}
+</p>
+
+<p>
+    Batman have many friends. {{len .Friend}} of them are:
+    {{index .Friend 0}}
+    {{index .Friend 1}}
+    {{index .Friend 2}}
+
+</p>
+
+{{ $con1 := true}}
+{{ $con2 := false}}
+
+{{if or $con1 $con2}}
+<p> be like Batman yeah</p>
+{{end}}
+
+
+
+</body>
+</html>
