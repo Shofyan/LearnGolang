@@ -33,3 +33,12 @@ func MiddlewareAllowOnlyGet(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
+
+type CustomMux struct {
+	http.ServeMux
+	middlewares []func(next http.Handler) http.Handler
+}
+
+func (c *CustomMux) RegisterMiddleware(next func(next http.Handler) http.Handler) {
+	c.middlewares = append(c.middlewares, next)
+}
