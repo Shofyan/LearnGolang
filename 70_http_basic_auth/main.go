@@ -25,6 +25,7 @@ func ActionStudent(w http.ResponseWriter, r *http.Request) {
 		OutputJSON(w, SelectStudent(id))
 		return
 	}
+	OutputJSON(w, GetStudent())
 }
 
 func OutputJSON(w http.ResponseWriter, o interface{}) {
