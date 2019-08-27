@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo"
 	"net/http"
@@ -23,6 +24,37 @@ func (cv CustomValidation) Validate(i interface{}) error {
 func main() {
 	e := echo.New()
 	e.Validator = &CustomValidation{validator: validator.New()}
+	e.HTTPErrorHandler = func(e error, context echo.Context) {
+		report, ok := e.(*echo.HTTPError)
+		if !ok {
+			report = echo.NewHTTPError(http.StatusInternalServerError, e.Error())
+		}
+
+		if castedObject, ok := err.(validator.ValidationErrors); ok {
+			for _, err := range castedObject {
+				switch err.Tag() {
+				case "required":
+					report.Message = fmt.Sprintf("%s is required",
+						err.Field())
+				case "email":
+					report.Message = fmt.Sprintf("%s is not valid email",
+						err.Field())
+				case "gte":
+					report.Message = fmt.Sprintf("%s value must be greater than %s",
+						err.Field(), err.Param())
+				case "lte":
+					report.Message = fmt.Sprintf("%s value must be lower than %s",
+						err.Field(), err.Param())
+				}
+
+				break
+			}
+		}
+
+		context.Logger().Error(report)
+		context.JSON(report.Code, report)
+
+	}
 
 	e.POST("/users", func(c echo.Context) error {
 		u := new(User)
