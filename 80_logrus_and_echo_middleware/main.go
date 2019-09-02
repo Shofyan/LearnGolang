@@ -68,7 +68,7 @@ func main() {
 	lock := make(chan error)
 	go func(lock chan error) { lock <- e.Start(":9000") }(lock)
 
-	time.Sleep(1 * time.Second)
+	time.Sleep(10 * time.Second)
 	MakeLogEntry(nil).Warning("Application start with ssl/tls enable ")
 
 	err := <-lock
