@@ -68,16 +68,22 @@
   version = "v1.8.0"
 
 [[projects]]
+  branch = "master"
   name = "github.com/golang/snappy"
   packages = ["."]
   revision = "2a8bb927dd31d8daada140a5d09578521ce5c36a"
-  version = "v0.0.1"
 
 [[projects]]
   name = "github.com/gorilla/mux"
   packages = ["."]
   revision = "00bdffe0f3c77e27d2cf6f5c70232a2d3e4d9c15"
   version = "v1.7.3"
+
+[[projects]]
+  name = "github.com/gorilla/securecookie"
+  packages = ["."]
+  revision = "e59506cc896acb7f7bf732d4fdf5e25f7ccd8983"
+  version = "v1.1.1"
 
 [[projects]]
   name = "github.com/hashicorp/hcl"
@@ -171,6 +177,12 @@
   version = "v1.0.0"
 
 [[projects]]
+  name = "github.com/rs/cors"
+  packages = ["."]
+  revision = "db0fe48135e83b5812a5a31be0eea66984b1b521"
+  version = "v1.7.0"
+
+[[projects]]
   name = "github.com/sirupsen/logrus"
   packages = ["."]
   revision = "839c75faf7f98a33d445d181f3018b5c3409a45e"
@@ -214,6 +226,12 @@
   packages = ["assert"]
   revision = "221dbe5ed46703ee255b1da0dec05086f5035f62"
   version = "v1.4.0"
+
+[[projects]]
+  name = "github.com/unrolled/secure"
+  packages = ["."]
+  revision = "f216236dcfc980ca06e5e4281a74f8869fb590fd"
+  version = "v1.0.1"
 
 [[projects]]
   name = "github.com/valyala/bytebufferpool"
@@ -358,6 +376,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "2e52bdb99181ada3d80fcb5939356a53df9b243d5ba07d20711f2543bba36287"
+  inputs-digest = "6318ee5501be760c22f45a8309e61d550aef81c0afec097e7e7850a1a7056f59"
   solver-name = "gps-cdcl"
   solver-version = 1
