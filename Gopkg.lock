@@ -2,6 +2,18 @@
 
 
 [[projects]]
+  name = "github.com/360EntSecGroup-Skylar/excelize"
+  packages = ["."]
+  revision = "dc8210d4a7d18f6425f6f18dc383b26778883715"
+  version = "v2.0.1"
+
+[[projects]]
+  name = "github.com/SebastiaanKlippert/go-wkhtmltopdf"
+  packages = ["."]
+  revision = "e414dad2c1e9df6e6f7c296cde9fd43acc596794"
+  version = "v1.5.0"
+
+[[projects]]
   branch = "master"
   name = "github.com/alecthomas/template"
   packages = [
@@ -103,6 +115,12 @@
   version = "v1.0.0"
 
 [[projects]]
+  name = "github.com/jung-kurt/gofpdf"
+  packages = ["."]
+  revision = "a73f202beea89ea4f3cee7c4965eec8622ca7138"
+  version = "v2.13.0"
+
+[[projects]]
   name = "github.com/konsorten/go-windows-terminal-sequences"
   packages = ["."]
   revision = "f55edac94c9bbba5d6182a4be46d86a2c9b5b50e"
@@ -157,6 +175,12 @@
   packages = ["."]
   revision = "3536a929edddb9a5b34bd6861dc4a9647cb459fe"
   version = "v1.1.2"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/mohae/deepcopy"
+  packages = ["."]
+  revision = "c48cc78d482608239f6c4c92a4abd87eb8761c90"
 
 [[projects]]
   name = "github.com/novalagung/gubrak"
@@ -368,6 +392,18 @@
   version = "v2.2.6"
 
 [[projects]]
+  branch = "v3"
+  name = "gopkg.in/alexcesaro/quotedprintable.v3"
+  packages = ["."]
+  revision = "2caba252f4dc53eaf6b553000885530023f54623"
+
+[[projects]]
+  name = "gopkg.in/gomail.v2"
+  packages = ["."]
+  revision = "41f3572897373c5538c50a2402db15db079fa4fd"
+  version = "2.0.0"
+
+[[projects]]
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
@@ -376,6 +412,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6318ee5501be760c22f45a8309e61d550aef81c0afec097e7e7850a1a7056f59"
+  inputs-digest = "b1e961a869f80128aea35e00c21e1cc0e54a314ad9ed71d6cebc4123faccb644"
   solver-name = "gps-cdcl"
   solver-version = 1
