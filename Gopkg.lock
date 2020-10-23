@@ -2,6 +2,18 @@
 
 
 [[projects]]
+  name = "github.com/360EntSecGroup-Skylar/excelize"
+  packages = ["."]
+  revision = "dc8210d4a7d18f6425f6f18dc383b26778883715"
+  version = "v2.0.1"
+
+[[projects]]
+  name = "github.com/SebastiaanKlippert/go-wkhtmltopdf"
+  packages = ["."]
+  revision = "e414dad2c1e9df6e6f7c296cde9fd43acc596794"
+  version = "v1.5.0"
+
+[[projects]]
   branch = "master"
   name = "github.com/alecthomas/template"
   packages = [
@@ -68,16 +80,22 @@
   version = "v1.8.0"
 
 [[projects]]
+  branch = "master"
   name = "github.com/golang/snappy"
   packages = ["."]
   revision = "2a8bb927dd31d8daada140a5d09578521ce5c36a"
-  version = "v0.0.1"
 
 [[projects]]
   name = "github.com/gorilla/mux"
   packages = ["."]
   revision = "00bdffe0f3c77e27d2cf6f5c70232a2d3e4d9c15"
   version = "v1.7.3"
+
+[[projects]]
+  name = "github.com/gorilla/securecookie"
+  packages = ["."]
+  revision = "e59506cc896acb7f7bf732d4fdf5e25f7ccd8983"
+  version = "v1.1.1"
 
 [[projects]]
   name = "github.com/hashicorp/hcl"
@@ -95,6 +113,12 @@
   ]
   revision = "8cb6e5b959231cc1119e43259c4a608f9c51a241"
   version = "v1.0.0"
+
+[[projects]]
+  name = "github.com/jung-kurt/gofpdf"
+  packages = ["."]
+  revision = "a73f202beea89ea4f3cee7c4965eec8622ca7138"
+  version = "v2.13.0"
 
 [[projects]]
   name = "github.com/konsorten/go-windows-terminal-sequences"
@@ -153,6 +177,12 @@
   version = "v1.1.2"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/mohae/deepcopy"
+  packages = ["."]
+  revision = "c48cc78d482608239f6c4c92a4abd87eb8761c90"
+
+[[projects]]
   name = "github.com/novalagung/gubrak"
   packages = ["."]
   revision = "47ef89cffca4da3ff1138e64e4fb5bc4becc549c"
@@ -169,6 +199,12 @@
   packages = ["difflib"]
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
   version = "v1.0.0"
+
+[[projects]]
+  name = "github.com/rs/cors"
+  packages = ["."]
+  revision = "db0fe48135e83b5812a5a31be0eea66984b1b521"
+  version = "v1.7.0"
 
 [[projects]]
   name = "github.com/sirupsen/logrus"
@@ -214,6 +250,12 @@
   packages = ["assert"]
   revision = "221dbe5ed46703ee255b1da0dec05086f5035f62"
   version = "v1.4.0"
+
+[[projects]]
+  name = "github.com/unrolled/secure"
+  packages = ["."]
+  revision = "f216236dcfc980ca06e5e4281a74f8869fb590fd"
+  version = "v1.0.1"
 
 [[projects]]
   name = "github.com/valyala/bytebufferpool"
@@ -350,6 +392,18 @@
   version = "v2.2.6"
 
 [[projects]]
+  branch = "v3"
+  name = "gopkg.in/alexcesaro/quotedprintable.v3"
+  packages = ["."]
+  revision = "2caba252f4dc53eaf6b553000885530023f54623"
+
+[[projects]]
+  name = "gopkg.in/gomail.v2"
+  packages = ["."]
+  revision = "41f3572897373c5538c50a2402db15db079fa4fd"
+  version = "2.0.0"
+
+[[projects]]
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
@@ -358,6 +412,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "2e52bdb99181ada3d80fcb5939356a53df9b243d5ba07d20711f2543bba36287"
+  inputs-digest = "b1e961a869f80128aea35e00c21e1cc0e54a314ad9ed71d6cebc4123faccb644"
   solver-name = "gps-cdcl"
   solver-version = 1
